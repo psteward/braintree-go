@@ -32,7 +32,7 @@ func (g *OauthGateway) CreateTokenFromCode(ctx context.Context, oAuthCredentialR
 		return nil, err
 	}
 	switch resp.StatusCode {
-	case 200:
+	case 201:
 		return resp.oauth()
 	}
 	return nil, &invalidResponseError{resp}

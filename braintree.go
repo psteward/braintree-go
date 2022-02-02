@@ -56,15 +56,6 @@ func NewWithHttpClient(env Environment, merchantId, publicKey, privateKey string
 	return &Braintree{credentials: newAPIKey(env, merchantId, publicKey, privateKey), HttpClient: client}
 }
 
-func NewWithClientCredentialsAndHttpClient(
-	env Environment,
-	clientId string,
-	clientSecret string,
-	client *http.Client,
-) *Braintree {
-	return &Braintree{credentials: newClientAPIKey(env, clientId, clientSecret), HttpClient: client}
-}
-
 // NewWithAccessToken creates a Braintree client with an Access Token and customized http client.
 func NewWithAccessTokenAndCustomizedHttpClient(accessToken string, client *http.Client) (*Braintree, error) {
 	c, err := newAccessToken(accessToken)
@@ -124,12 +115,7 @@ func (g *Braintree) executeVersion(ctx context.Context, method, path string, xml
 		}
 	}
 
-	baseUrl := g.Environment().BaseURL()
-	if g.MerchantID() != "" {
-		baseUrl = g.MerchantURL()
-	}
-
-	url := baseUrl + "/" + path
+	url := g.MerchantURL() + "/" + path
 
 	if g.Logger != nil {
 		g.Logger.Printf("> %s %s\n%s", method, url, buf.String())
