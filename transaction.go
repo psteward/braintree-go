@@ -101,6 +101,7 @@ type Transaction struct {
 	Disputes                     []*Dispute                `xml:"disputes>dispute"`
 	AuthorizationExpiresAt       *time.Time                `xml:"authorization-expires-at"`
 	NetworkTransactionId         *string                   `xml:"network-transaction-id"`
+	AcquirerReferenceNumber      string                    `xml:"acquirer-reference-number"`
 }
 
 type TransactionRequest struct {
