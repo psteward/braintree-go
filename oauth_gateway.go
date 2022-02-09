@@ -37,3 +37,16 @@ func (g *OauthGateway) CreateTokenFromCode(ctx context.Context, oAuthCredentialR
 	}
 	return nil, &invalidResponseError{resp}
 }
+
+func (g *OauthGateway) CreateTokenFromRefreshToken(ctx context.Context, oAuthCredentialRequest *OAuthCredentialRequest) (*OAuthCredentials, error) {
+	oAuthCredentialRequest.GrantType = "refresh_token"
+	resp, err := g.executeVersion(ctx, "POST", "oauth/access_tokens", oAuthCredentialRequest, apiVersion4)
+	if err != nil {
+		return nil, err
+	}
+	switch resp.StatusCode {
+	case 200:
+		return resp.oauth()
+	}
+	return nil, &invalidResponseError{resp}
+}
