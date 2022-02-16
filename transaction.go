@@ -113,6 +113,7 @@ type TransactionRequest struct {
 	PaymentMethodToken        string                      `xml:"payment-method-token,omitempty"`
 	SharedPaymentMethodToken  string                      `xml:"shared-payment-method-token,omitempty"`
 	PaymentMethodNonce        string                      `xml:"payment-method-nonce,omitempty"`
+	SharedPaymentMethodNonce  string                      `xml:"shared-payment-method-nonce,omitempty"`
 	MerchantAccountId         string                      `xml:"merchant-account-id,omitempty"`
 	PlanId                    string                      `xml:"plan-id,omitempty"`
 	CreditCard                *CreditCard                 `xml:"credit-card,omitempty"`
